@@ -1,7 +1,8 @@
 package es.estech;
 
-public class Main {
+import java.util.Scanner;
 
+public class Main {
 
     public static boolean esCapicua (String numero)
     {
@@ -14,7 +15,7 @@ public class Main {
         }
 
         if (numero.length() == 3){
-            if (numero.charAt(0)==numero.charAt(1)){
+            if (numero.charAt(0)==numero.charAt(2)){
                 result = true;
             }
         }
@@ -43,6 +44,53 @@ public class Main {
 
 
     public static void main(String[] args) {
-	
+        Scanner sc = new Scanner(System.in);
+        int number;
+        String numberInSentence;
+
+        System.out.println("Introduce un número entero");
+        number = (int) Validate.validateNumeric(sc,0);
+
+        //Parseo el número a una cadena
+        numberInSentence = String.valueOf(number);
+        if(number < 0){
+            numberInSentence = numberInSentence.substring(1,numberInSentence.length()); //Le quito el símbolo - al número negativo para poder utilizarlo.
+        }
+
+        //Compruebo las cifras del número para mostrar una información u otra
+        switch (numberInSentence.length()){
+            case 1:
+                if(esDivisiblePorTres(numberInSentence))
+                    System.out.println(number + " es divisible por tres");
+                else
+                    System.out.println(number + " no es divisble por tres");
+                break;
+            case 2:
+                if (esCapicua(numberInSentence))
+                    System.out.println(number + " es capicúa");
+                else
+                    System.out.println(number + " no es capicúa");
+                break;
+            case 3:
+                if (esCapicua(numberInSentence))
+                    System.out.println(number + " es capicúa");
+                else
+                    System.out.println(number + " no es capicúa");
+
+                if(esPar(numberInSentence))
+                    System.out.println(number + " es par");
+                else
+                    System.out.println(number + " es impar");
+                break;
+
+            default:
+                if(esPar(numberInSentence))
+                    System.out.println(number + " es par");
+                else
+                    System.out.println(number + " es impar");
+                break;
+
+        }
+        sc.close();
     }
 }
